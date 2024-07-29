@@ -29,17 +29,48 @@ export default function App() {
 
   const onItemClick = (item) => {
     if (item.id === "move right") {
-      setCatPosition((prev) => ({ x: prev.x + 10, y: prev.y }));
+      const interval = setInterval(() => {
+        setCatPosition((prev) => ({ x: prev.x + 10, y: prev.y }));
+      }, 100);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 300);
     } else if (item.id === "move left") {
-      setCatPosition((prev) => ({ x: prev.x - 10, y: prev.y }));
+      const interval = setInterval(() => {
+        setCatPosition((prev) => ({ x: prev.x - 10, y: prev.y }));
+      }, 100);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 300);
     } else if (item.id === "turnLeft") {
-      setCatRotation((prev) => prev - 15);
+      const interval = setInterval(() => {
+        setCatRotation((prev) => prev - 15);
+      }, 100);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 200);
+
     } else if (item.id === "turnRight") {
-      setCatRotation((prev) => prev + 15);
+      const interval = setInterval(() => {
+        setCatRotation((prev) => prev + 15);
+      }, 100);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 200);
     } else if (item.id === "changeX") {
-      setCatPosition((prev) => ({ x: prev.x, y: prev.y + 10 }));
+      const interval = setInterval(() => {
+        setCatPosition((prev) => ({ x: prev.x, y: prev.y + 10 }));
+      }, 100);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 300);
     } else if (item.id === "changeY") {
-      setCatPosition((prev) => ({ x: prev.x, y: prev.y - 10 }));
+      const interval = setInterval(() => {
+        setCatPosition((prev) => ({ x: prev.x, y: prev.y - 10 }));
+      }, 100);
+      setTimeout(() => {
+        clearInterval(interval);
+      }, 300);
     } else if (item.id === "sayHello") {
       setCatMessage("Hello");
     } else if (item.id === "sayHello2") {
@@ -73,6 +104,14 @@ export default function App() {
     setCatMessage("");
   };
 
+  const runActions = () => {
+    droppedItems.forEach((item, index) => {
+      setTimeout(() => {
+        onItemClick(item);
+      }, index * 500);
+    });
+  };
+
   useEffect(() => {
     const handleGlobalDrop = (e) => {
       if (!e.target.closest('.flex-1.h-full.overflow-auto')) {
@@ -99,6 +138,7 @@ export default function App() {
               onDragOver={onDragOver}
               onDeleteItem={onDeleteItem}
               onItemClick={onItemClick}
+              onRun={runActions}
             />
           </div>
           <div className="w-1/3 h-screen overflow-hidden flex flex-row bg-white border-t border-l border-gray-200 rounded-tl-xl ml-2">

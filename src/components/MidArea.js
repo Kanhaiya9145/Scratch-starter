@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "./Icon";
 
-export default function MidArea({ droppedItems, onDrop, onDragOver, onDeleteItem, onItemClick }) {
+export default function MidArea({ droppedItems, onDrop, onDragOver, onDeleteItem, onItemClick, onRun }) {
   return (
     <div
       className="flex-1 h-full overflow-auto p-5"
@@ -9,6 +9,12 @@ export default function MidArea({ droppedItems, onDrop, onDragOver, onDeleteItem
       onDragOver={onDragOver}
     >
       <h2 className="text-xl font-bold text-center w-full mb-4 text-black-500 border border-green-700 rounded-lg">Mid Area</h2>
+      <button
+        onClick={onRun}
+        className="bg-green-500 text-white px-4 py-2 rounded"
+       style={{float: 'right'}}>
+        Run
+      </button>
       {droppedItems.map((item, index) => (
         <div
           key={`${item.id}-${index}`}
